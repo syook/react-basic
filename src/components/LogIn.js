@@ -46,7 +46,10 @@ class LogIn extends Component {
       const logInResponse = await logIn(this.state)
       console.log(logInResponse);
       if (logInResponse.success) {
-        this.props.history.push('/dashboard')
+        const token = logInResponse.object.token;
+        localStorage.setItem('token', token)
+        // this.props.history.push('/')
+        window.location.reload()
       } else {
         this.props.history.push('/log_in')
       }

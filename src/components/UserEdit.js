@@ -5,12 +5,12 @@ import { updateUser } from './../api/users';
 class UserEdit extends Component {
   constructor(props) {
     super(props);
-    const user = this.props.location.state.user
+    const user = this.props.location.state.user;
     this.state = {
       id: user.id,
       username: user.username,
       email: user.email,
-      password: user.email,
+      password: user.password,
       account_id: user.account_id
     };
   }
@@ -35,8 +35,9 @@ class UserEdit extends Component {
     // console.log(this.state);
     try {
       const userResponse = await updateUser(this.state);
+      console.log(userResponse);
       if (userResponse.success) {
-        this.props.history.push('/users')
+        this.props.history.goBack();
       } else {
         this.props.history.push('/users/edit')
       }

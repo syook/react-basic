@@ -4,7 +4,9 @@ import { allUsers } from './../api/users';
 class Users extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: [] };
+    this.state = {
+      users: []
+    };
   }
 
   async componentWillMount(){
@@ -36,7 +38,7 @@ class Users extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.state.users.map((user, index) => (
+              { this.state.users.length && this.state.users.map((user, index) => (
                 <tr key={index}>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
