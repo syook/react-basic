@@ -1,11 +1,11 @@
 import { handleApiResponse } from './utils';
 
-export function createAccount(account){
+export function logIn(user){
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:4000/accounts', {
+    fetch('http://localhost:4000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 'account': account })
+      body: JSON.stringify({ 'user': user })
     }).then((response) => {
       response.json().then(
         data => {

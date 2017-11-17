@@ -37,6 +37,11 @@ class SignUp extends Component {
     try {
       const signUpResponse = await createAccount(this.state)
       console.log(signUpResponse);
+      if (signUpResponse.success) {
+        this.props.history.push('/log_in')
+      } else {
+        this.props.history.push('/sign_up')
+      }
     } catch (error) {
       console.log(error);
     }

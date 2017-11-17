@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { logIn } from './../api/logIn';
 
 class LogIn extends Component {
   constructor(props) {
@@ -40,19 +41,30 @@ class LogIn extends Component {
     }
   }
 
-  submitForm = (e) => {
-    this.validateEmail()
-    this.validatePassword()
-    if (!this.state.emailValid) { console.log(this.state.emailErrorMessage); }
-    if (!this.state.passwordValid) { console.log(this.state.passwordErrorMessage); }
-    console.log(this.state);
+  submitForm = async (e) => {
+    try {
+      const logInResponse = await logIn(this.state)
+      console.log(logInResponse);
+      if (logInResponse.success) {
+        this.props.history.push('/dashboard')
+      } else {
+        this.props.history.push('/log_in')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // this.validateEmail()
+    // this.validatePassword()
+    // if (!this.state.emailValid) { console.log(this.state.emailErrorMessage); }
+    // if (!this.state.passwordValid) { console.log(this.state.passwordErrorMessage); }
+    // console.log(this.state);
   }
 
   render() {
     return (
       <div style={{marginTop:'30px', marginLeft:'30px'}}>
         <div>
-          <h2>Create Account</h2>
+          <h2>Log In</h2>
         </div>
 
         <div>
