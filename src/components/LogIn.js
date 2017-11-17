@@ -49,7 +49,7 @@ class LogIn extends Component {
         const token = logInResponse.object.token;
         localStorage.setItem('token', token)
         // this.props.history.push('/')
-        window.location.reload()
+        window.location.reload();
       } else {
         this.props.history.push('/log_in')
       }

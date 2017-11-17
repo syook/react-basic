@@ -6,11 +6,19 @@ class Dashboard extends Component {
     super(props);
   }
 
+  logOut = (e) => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
+
   render() {
     return (
-      <Users
-        {...this.props}
-      />
+      <div>
+        <div><button onClick={this.logOut}>Logout</button></div>
+        <Users
+          {...this.props}
+        />
+      </div>
     );
   }
 }
