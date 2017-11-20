@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm';
 import { createUser } from './../api/users';
+import { connect } from 'react-redux';
 
 class UserNew extends Component {
   constructor(props) {
@@ -30,10 +31,8 @@ class UserNew extends Component {
   }
 
   submitForm = async (e) => {
-    console.log(this.state);
     try {
-      const userResponse = await createUser(this.state);
-      console.log(userResponse);
+      const userResponse = await createUser(this.state, this.props.token);
       if (userResponse.success) {
         this.props.history.goBack();
       } else {
@@ -62,4 +61,6 @@ class UserNew extends Component {
   }
 }
 
-export default UserNew;
+const mapStateToProps = ({ token }) => ({ token })
+
+export default connect(mapStateToProps)(UserNew);

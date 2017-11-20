@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { logIn } from './../api/logIn';
+import { saveToken } from './../actions/saveToken';
+import store from './../store';
 
 class LogIn extends Component {
   constructor(props) {
@@ -47,9 +49,10 @@ class LogIn extends Component {
       console.log(logInResponse);
       if (logInResponse.success) {
         const token = logInResponse.object.token;
-        localStorage.setItem('token', token)
+        // localStorage.setItem('token', token)
+        store.dispatch(saveToken(token));
         // this.props.history.push('/')
-        window.location.reload();
+        // window.location.reload();
       } else {
         this.props.history.push('/log_in')
       }

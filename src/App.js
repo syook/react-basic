@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-// import Test from './test';
+import store from './store';
+import { testAction } from './actions/test';
 import { routes, restrictedRoutes } from './routes';
+import { connect } from 'react-redux';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +14,8 @@ class App extends Component {
 
   async componentWillMount(){
     try {
+      const data = { status: true, message: 'Initial things.'}
+      store.dispatch(testAction(data));
       const token = localStorage.getItem('token');
       this.setState({token: token});
     } catch (error) {
@@ -22,13 +24,21 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="App">
-        {this.state.token ? routes() : restrictedRoutes()}
+        {this.props.token ? routes() : restrictedRoutes()}
         {/* {routes()} */}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ test, token }) => ({ test, token })
+// const mapStateToProps = (state) => {
+//   return {
+//     test: state.test,
+//     token: state.token
+//   }
+// }
+export default connect(mapStateToProps)(App);

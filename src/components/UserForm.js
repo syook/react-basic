@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const UserForm = props => (
   <div style={{marginTop:'30px', marginLeft:'30px'}}>

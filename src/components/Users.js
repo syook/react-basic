@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { allUsers } from './../api/users';
+import { connect } from 'react-redux';
 
 class Users extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Users extends Component {
 
   async componentWillMount(){
     try {
-      const userResponse = await allUsers();
+      const userResponse = await allUsers(this.props.token);
       this.setState({users: userResponse});
       console.log(this.state);
     } catch (error) {
@@ -20,6 +21,7 @@ class Users extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div style={{marginTop:'30px', marginLeft:'30px'}}>
         <div>
@@ -55,4 +57,6 @@ class Users extends Component {
   }
 }
 
-export default Users;
+const mapStateToProps = ({ token }) => ({ token })
+
+export default connect(mapStateToProps)(Users);

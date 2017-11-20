@@ -1,7 +1,6 @@
-import { handleApiResponse } from './utils';
-const token = localStorage.getItem('token');
+// import { handleApiResponse } from './utils';
 
-export function allUsers() {
+export function allUsers(token) {
   return new Promise((resolve, reject) => {
     fetch('http://localhost:4000/users', {
       method: 'GET',
@@ -20,7 +19,7 @@ export function allUsers() {
   })
 }
 
-export function createUser(user){
+export function createUser(user, token){
   return new Promise((resolve, reject) => {
     fetch('http://localhost:4000/users', {
       method: 'POST',
@@ -40,7 +39,7 @@ export function createUser(user){
   });
 }
 
-export function updateUser(user){
+export function updateUser(user, token){
   return new Promise((resolve, reject) => {
     fetch(`http://localhost:4000/users/${user.id}`, {
       method: 'PUT',

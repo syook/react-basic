@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Users from './Users';
+import { saveToken } from './../actions/saveToken';
+import store from './../store';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -7,8 +9,9 @@ class Dashboard extends Component {
   }
 
   logOut = (e) => {
-    localStorage.removeItem('token');
-    window.location.reload();
+    // localStorage.removeItem('token');
+    // window.location.reload();
+    store.dispatch(saveToken(null));
   }
 
   render() {
