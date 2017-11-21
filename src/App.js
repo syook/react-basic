@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import store from './store';
 import { testAction } from './actions/test';
+import { saveToken } from './actions/saveToken';
 import { routes, restrictedRoutes } from './routes';
 import { connect } from 'react-redux';
 
@@ -17,6 +18,7 @@ class App extends Component {
       const data = { status: true, message: 'Initial things.'}
       store.dispatch(testAction(data));
       const token = localStorage.getItem('token');
+      store.dispatch(saveToken(token));
       this.setState({token: token});
     } catch (error) {
       console.log(error);
@@ -24,6 +26,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('App');
     console.log(this.props);
     return (
       <div className="App">

@@ -11,7 +11,7 @@ class Dashboard extends Component {
   logOut = (e) => {
     // localStorage.removeItem('token');
     // window.location.reload();
-    store.dispatch(saveToken(null));
+    // store.dispatch(saveToken(null));
   }
 
   render() {

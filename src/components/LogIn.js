@@ -49,7 +49,7 @@ class LogIn extends Component {
       console.log(logInResponse);
       if (logInResponse.success) {
         const token = logInResponse.object.token;
-        // localStorage.setItem('token', token)
+        localStorage.setItem('token', token)
         store.dispatch(saveToken(token));
         // this.props.history.push('/')
         // window.location.reload();
