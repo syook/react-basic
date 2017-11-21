@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { allUsers } from './../api/users';
 import { connect } from 'react-redux';
+import store from './../store';
+import { fetchUsers } from './../actions/fetchUsers';
 
 class Users extends Component {
   constructor(props) {
@@ -13,8 +15,8 @@ class Users extends Component {
   async componentWillMount(){
     try {
       const userResponse = await allUsers(this.props.token);
-      this.setState({users: userResponse});
-      console.log(this.state);
+      // this.setState({users: userResponse});
+      store.dispatch(fetchUsers(userResponse));
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +42,7 @@ class Users extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.state.users.length && this.state.users.map((user, index) => (
+              { this.props.users.length && this.props.users.map((user, index) => (
                 <tr key={index}>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
@@ -57,6 +59,6 @@ class Users extends Component {
   }
 }
 
-const mapStateToProps = ({ token }) => ({ token })
+const mapStateToProps = ({ token, users }) => ({ token, users })
 
 export default connect(mapStateToProps)(Users);
