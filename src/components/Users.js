@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { allUsers } from './../api/users';
 import { connect } from 'react-redux';
 import store from './../store';
-import { fetchUsers } from './../actions/fetchUsers';
+import { fetchUsers } from './../actions/users';
 
 class Users extends Component {
   constructor(props) {
@@ -12,14 +12,14 @@ class Users extends Component {
     };
   }
 
-  async componentWillMount(){
-    try {
-      const userResponse = await allUsers(this.props.token);
-      // this.setState({users: userResponse});
-      store.dispatch(fetchUsers(userResponse));
-    } catch (error) {
-      console.log(error);
-    }
+  componentWillMount(){
+    this.props.dispatch(fetchUsers())
+    // try {
+    //   const userResponse = await allUsers(this.props.token);
+    //   store.dispatch(fetchUsers(userResponse));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   render() {
