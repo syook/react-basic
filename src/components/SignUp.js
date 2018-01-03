@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { createAccount } from './../api/signUp';
+import { saveSubdomain } from './../actions/saveSubdomain';
+import store from './../store';
 
 class SignUp extends Component {
   constructor(props) {
@@ -38,7 +40,12 @@ class SignUp extends Component {
       const signUpResponse = await createAccount(this.state)
       console.log(signUpResponse);
       if (signUpResponse.success) {
-        this.props.history.push('/log_in')
+        const subdomain = signUpResponse.account.subdomain;
+        store.dispatch(saveSubdomain(subdomain));
+        this.setState({subdomain: subdomain});
+        const url = 'http://' + subdomain + '.' + window.location.host;
+        // this.props.history.push(url)
+        window.location = url;
       } else {
         this.props.history.push('/sign_up')
       }

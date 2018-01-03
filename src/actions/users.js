@@ -8,7 +8,7 @@ export const setUsers = (users) => {
 export const fetchUsers = () => {
   return (dispatch, getState) => {
     try {
-      allUsers(getState().token)
+      allUsers(getState().token, getState().subdomain)
       .then((response) => {
         return dispatch(setUsers(response))
       })

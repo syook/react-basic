@@ -1,8 +1,8 @@
 // import { handleApiResponse } from './utils';
 
-export function allUsers(token) {
+export function allUsers(token, subdomain) {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:4000/users', {
+    fetch(`http://${subdomain}.lvh.me:4000/users`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,9 +19,9 @@ export function allUsers(token) {
   })
 }
 
-export function createUser(user, token){
+export function createUser(user, token, subdomain){
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:4000/users', {
+    fetch(`http://${subdomain}.lvh.me:4000/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,9 +39,9 @@ export function createUser(user, token){
   });
 }
 
-export function updateUser(user, token){
+export function updateUser(user, token, subdomain){
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:4000/users/${user.id}`, {
+    fetch(`http://${subdomain}.lvh.me:4000/users/${user.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

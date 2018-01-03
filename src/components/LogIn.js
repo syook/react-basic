@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { logIn } from './../api/logIn';
 import { saveToken } from './../actions/saveToken';
 import store from './../store';
+import { connect } from 'react-redux';
 
 class LogIn extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class LogIn extends Component {
   }
 
   validateEmail = (e) => {
-    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (this.state.email.length === 0) {
       this.setState({ emailErrorMessage: 'Email is empty.' })
     } else if (!emailRegex.test(this.state.email)) {
@@ -45,7 +46,7 @@ class LogIn extends Component {
 
   submitForm = async (e) => {
     try {
-      const logInResponse = await logIn(this.state)
+      const logInResponse = await logIn(this.state, this.props.subdomain)
       console.log(logInResponse);
       if (logInResponse.success) {
         const token = logInResponse.object.token;
@@ -93,4 +94,6 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+const mapStateToProps = ({ subdomain }) => ({ subdomain })
+
+export default connect(mapStateToProps)(LogIn);

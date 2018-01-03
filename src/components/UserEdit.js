@@ -35,7 +35,7 @@ class UserEdit extends Component {
   submitForm = async (e) => {
     // console.log(this.state);
     try {
-      const userResponse = await updateUser(this.state, this.props.token);
+      const userResponse = await updateUser(this.state, this.props.token, this.props.subdomain);
       console.log(userResponse);
       if (userResponse.success) {
         this.props.history.goBack();
@@ -65,6 +65,6 @@ class UserEdit extends Component {
   }
 }
 
-const mapStateToProps = ({ token }) => ({ token })
+const mapStateToProps = ({ token, subdomain }) => ({ token, subdomain })
 
 export default connect(mapStateToProps)(UserEdit);

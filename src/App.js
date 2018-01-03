@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import store from './store';
-import { testAction } from './actions/test';
+// import { testAction } from './actions/test';
 import { saveToken } from './actions/saveToken';
-import { routes, restrictedRoutes } from './routes';
+import { saveSubdomain } from './actions/saveSubdomain';
+import { tenantRoutes, tenantUnauthorizedRoutes, adminRoutes } from './routes';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -15,8 +16,12 @@ class App extends Component {
 
   async componentWillMount(){
     try {
-      const data = { status: true, message: 'Initial things.'}
-      store.dispatch(testAction(data));
+      // const data = { status: true, message: 'Initial things.'}
+      // store.dispatch(testAction(data));
+      const windowLocation = window.location.hostname.split('.')
+      const subdomain = windowLocation.length === 3 ? windowLocation[0] : null
+      store.dispatch(saveSubdomain(subdomain));
+      this.setState({subdomain: subdomain});
       const token = localStorage.getItem('token');
       store.dispatch(saveToken(token));
       this.setState({token: token});
@@ -30,14 +35,14 @@ class App extends Component {
     console.log(this.props);
     return (
       <div className="App">
-        {this.props.token ? routes() : restrictedRoutes()}
+        {this.props.subdomain ? this.props.token ? tenantRoutes() : tenantUnauthorizedRoutes() : adminRoutes()}
         {/* {routes()} */}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ test, token }) => ({ test, token })
+const mapStateToProps = ({ test, token, subdomain }) => ({ test, token, subdomain })
 // const mapStateToProps = (state) => {
 //   return {
 //     test: state.test,

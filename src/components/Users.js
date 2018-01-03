@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { allUsers } from './../api/users';
+// import { allUsers } from './../api/users';
 import { connect } from 'react-redux';
-import store from './../store';
+// import store from './../store';
 import { fetchUsers } from './../actions/users';
 
 class Users extends Component {

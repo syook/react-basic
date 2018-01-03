@@ -1,8 +1,8 @@
 // import { handleApiResponse } from './utils';
 
-export function logIn(user){
+export function logIn(user, subdomain){
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:4000/login', {
+    fetch(`http://${subdomain}.lvh.me:4000/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 'user': user })

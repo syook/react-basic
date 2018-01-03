@@ -5,8 +5,13 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props.history.push('/log_in')}>Log In</button>
-        <button onClick={() => this.props.history.push('/sign_up')}>Sign Up</button>
+        <div>
+          <h2>Welcome to SyookPro Demo</h2>
+        </div>
+        <div>
+          {/* <button onClick={() => this.props.history.push('/log_in')}>Log In</button> */}
+          <button onClick={() => this.props.history.push('/sign_up')}>Sign Up</button>
+        </div>
       </div>
     );
   }

@@ -21,10 +21,10 @@ const UserForm = props => (
       <input type="text" value={props.password} onChange={props.updatePassword} />
     </div><br/>
 
-    <div>
+    {/* <div>
       <label>Account Id</label><br/>
       <input type="text" value={props.accountId} onChange={props.updateAccountId} />
-    </div><br/>
+    </div><br/> */}
 
     <div>
       <button type="submit" onClick={props.submitForm}>Submit</button>

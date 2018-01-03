@@ -32,7 +32,7 @@ class UserNew extends Component {
 
   submitForm = async (e) => {
     try {
-      const userResponse = await createUser(this.state, this.props.token);
+      const userResponse = await createUser(this.state, this.props.token, this.props.subdomain);
       if (userResponse.success) {
         this.props.history.goBack();
       } else {
@@ -61,6 +61,6 @@ class UserNew extends Component {
   }
 }
 
-const mapStateToProps = ({ token }) => ({ token })
+const mapStateToProps = ({ token, subdomain }) => ({ token, subdomain })
 
 export default connect(mapStateToProps)(UserNew);
